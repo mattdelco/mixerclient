@@ -114,12 +114,18 @@ cc_library(
 
 ISTIO_API = "d59de23cb53edd57f5cc36e9c7e98fe92b110f01"
 
-def mixerapi_repositories(bind=True):
-    native.git_repository(
-        name = "mixerapi_git",
-        commit = ISTIO_API,
-        remote = "https://github.com/istio/api.git",
-    )
+def mixerapi_repositories(bind=True, use_local=False):
+    if use_local:
+        native.local_repository(
+            name = "mixerapi_git",
+            path = "../api"
+        )
+    else:
+        native.git_repository(
+            name = "mixerapi_git",
+            commit = ISTIO_API,
+            remote = "https://github.com/istio/api.git",
+        )
     if bind:
         native.bind(
             name = "mixer_api_cc_proto",
