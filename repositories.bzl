@@ -118,7 +118,7 @@ def mixerapi_repositories(bind=True, use_local=False):
     if use_local:
         native.local_repository(
             name = "mixerapi_git",
-            path = "../api"
+            path = "../../api"
         )
     else:
         native.git_repository(
